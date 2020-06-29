@@ -28,7 +28,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	req.Header.Set("User-Agent", "foo")
+	req.Header.Set("User-Agent", "Go-Api-Req")
 
 	res, getErr := mullvadClient.Do(req)
 	if getErr != nil {
