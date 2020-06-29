@@ -13,6 +13,14 @@ type data struct {
 	IP            string `json:"ip"`
 	Country       string `json:"country"`
 	MullvadExitIP bool   `json:"mullvad_exit_ip"`
+	Blacklisted   struct {
+		Blacklisted bool `json:"blacklisted"`
+		Results     []struct {
+			Name        string `json:"name"`
+			Link        string `json:"link"`
+			Blacklisted bool   `json:"blacklisted"`
+		} `json:"results"`
+	}
 }
 
 func main() {
@@ -49,9 +57,17 @@ func main() {
 	if data1.MullvadExitIP == true {
 
 		fmt.Println("Your currently connected to mullvad")
+
+		if data1.Blacklisted.Blacklisted == true {
+			fmt.Println("This server is currently blacklisted")
+		} else if data1.Blacklisted.Blacklisted == false {
+			fmt.Println("This server is currently not blacklisted")
+		}
+
 	} else {
 		fmt.Println("Your currently not connected to mullvad")
 	}
+
 	fmt.Println("Your Curent IP address is : ", data1.IP)
 	fmt.Println("Your Current exit server is in :", data1.Country)
 }
